@@ -1,0 +1,147 @@
+:root {
+  --lightest-color: #f8fafc;
+  --lighter-color: #d9eafd;
+  --darker-color: #bcccdc;
+  --darkest-color: #9aa6b2;
+  --shadow-color: #9aa6b230;
+
+  --light-stroke: #dedede;
+  --dark-stroke: #b6b6b6;
+
+  --text-gray: #797979;
+  --text-black: #191919;
+}
+
+html,
+body,
+main {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--lightest-color);
+
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  color: var(--darkest-color);
+  margin-left: 10px;
+}
+
+main {
+  flex-grow: 1;
+
+  background-color: white;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  border-radius: 30px;
+  padding: 25px;
+  box-shadow: 0 0 8px var(--shadow-color);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.todoDate {
+  color: var(--darker-color);
+}
+
+.todoDate .year {
+  font-weight: bold;
+}
+
+.todoDate #date {
+  margin: 0;
+}
+
+.todoInput {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.todoInput input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-bottom: 1px solid var(--light-stroke);
+  border-radius: 10px;
+}
+
+.todoInput input:focus {
+  box-shadow: 0 0 8px var(--shadow-color);
+  border-bottom: 1px solid var(--dark-stroke);
+  outline: none;
+}
+
+.todoInput input:hover,
+.todoItem:hover {
+  box-shadow: 0 0 8px var(--shadow-color);
+}
+
+.todoInput .plusBtn {
+  border-radius: 100px;
+  aspect-ratio: 1 / 1;
+
+  width: 50px;
+  color: white;
+  background-color: var(--darker-color);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--shadow-color);
+  border: 1px solid var(--darker-color);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.todoInput .plusBtn:hover {
+  color: var(--darker-color);
+  background-color: white;
+}
+
+.todoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  max-height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.todoItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 3px;
+
+  border-radius: 10px;
+}
+
+.todoItem .state {
+  color: var(--darker-color);
+  display: flex;
+  cursor: pointer;
+}
+
+.todoItem .content {
+  flex-grow: 1;
+  color: var(--text-black);
+}
+
+.todoItem .removeBtn {
+  display: flex;
+  color: var(--dark-stroke);
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.finished {
+  color: var(--light-stroke);
+}

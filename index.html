@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Todo</title>
+  </head>
+  <body>
+    <header><h1>Todo</h1></header>
+    <main>
+      <section class="todoDate">
+        <span class="year">2025</span>
+        <h1 id="date">Mar 13 THU</h1>
+      </section>
+      <section class="todoInput">
+        <input placeholder="무엇을 하고 싶은가요?" />
+        <button class="plusBtn">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-plus"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+        </button>
+      </section>
+
+      <svg style="display: none">
+        <symbol id="icon-circle" viewBox="0 0 24 24">
+          <circle
+            cx="12"
+            cy="12"
+            r="10"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </symbol>
+
+        <symbol
+          id="icon-circle-dashed"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M10.1 2.182a10 10 0 0 1 3.8 0" />
+          <path d="M13.9 21.818a10 10 0 0 1-3.8 0" />
+          <path d="M17.609 3.721a10 10 0 0 1 2.69 2.7" />
+          <path d="M2.182 13.9a10 10 0 0 1 0-3.8" />
+          <path d="M20.279 17.609a10 10 0 0 1-2.7 2.69" />
+          <path d="M21.818 10.1a10 10 0 0 1 0 3.8" />
+          <path d="M3.721 6.391a10 10 0 0 1 2.7-2.69" />
+          <path d="M6.391 20.279a10 10 0 0 1-2.69-2.7" />
+        </symbol>
+
+        <symbol
+          id="icon-circle-check-big"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21.801 10A10 10 0 1 1 17 3.335" />
+          <path d="m9 11 3 3L22 4" />
+        </symbol>
+
+        <symbol
+          id="icon-x"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </symbol>
+      </svg>
+
+      <section class="todoList">
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle"></use>
+            </svg>
+          </div>
+          <div class="content">dffe</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-dashed"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg width="24" height="24">
+              <use href="#icon-x"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="todoItem">
+          <div class="state">
+            <svg width="24" height="24">
+              <use href="#icon-circle-check-big"></use>
+            </svg>
+          </div>
+          <div class="content">bablalblabla</div>
+          <button class="removeBtn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-x"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
