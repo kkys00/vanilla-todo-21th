@@ -55,7 +55,7 @@ main {
   font-weight: bold;
 }
 
-.todoDate #date {
+.todoDate .date {
   margin: 0;
 }
 
