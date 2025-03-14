@@ -5,7 +5,7 @@ const todoListContainer = document.getElementById('todoList-container')
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
 const ICON_X = '#icon-x'
 
-const todoList = []
+const todoList = {}
 
 document.addEventListener('DOMContentLoaded', () => {
   const yearElement = document.getElementById('daily-year')
@@ -22,7 +22,8 @@ const handleAddTodo = () => {
   const task = input.value
 
   if (task) {
-    todoList.push(task)
+    const key = new Date().getTime()
+    todoList[key] = task
     input.value = ''
     displayTodo()
   }
@@ -63,6 +64,7 @@ const createTodoElement = (content) => {
   removeBtn.className = 'removeBtn'
   const removeSvg = createSvgElement(ICON_X)
   removeBtn.appendChild(removeSvg)
+  removeBtn.addEventListener('click', handleRemoveTodo)
 
   todoItem.appendChild(stateDiv)
   todoItem.appendChild(contentDiv)
@@ -73,8 +75,15 @@ const createTodoElement = (content) => {
 
 const displayTodo = () => {
   todoListContainer.innerHTML = ''
-  todoList.map((task) => {
-    const todoItem = createTodoElement(task)
+
+  for (let id in todoList) {
+    const content = todoList[id]
+    const todoItem = createTodoElement(content)
+    todoItem.id = id
     todoListContainer.appendChild(todoItem)
-  })
+  }
+}
+
+const handleRemoveTodo = (e) => {
+  console.log(e.target.closest('div.todoItem'))
 }
