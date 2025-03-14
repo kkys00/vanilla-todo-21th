@@ -85,5 +85,12 @@ const displayTodo = () => {
 }
 
 const handleRemoveTodo = (e) => {
-  console.log(e.target.closest('div.todoItem'))
+  const todoItem = e.target.closest('div.todoItem')
+  const id = todoItem.id
+  if (
+    window.confirm(`${todoList[id]}를 삭제하시겠습니까? 복구되지 않습니다.`)
+  ) {
+    delete todoList[id]
+    displayTodo()
+  }
 }
