@@ -130,7 +130,6 @@ main {
 
 .todoItem .content {
   flex-grow: 1;
-  color: var(--text-black);
 }
 
 .todoItem .removeBtn {
@@ -144,4 +143,13 @@ main {
 
 .finished {
   color: var(--light-stroke);
+  text-decoration: line-through;
+}
+
+svg {
+  user-select: none;
+}
+
+use {
+  pointer-events: none;
 }

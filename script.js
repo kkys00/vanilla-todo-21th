@@ -3,9 +3,12 @@ const addButton = document.getElementById('add-button')
 const todoListContainer = document.getElementById('todoList-container')
 
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
+const ICON_CHECKED = '#icon-circle-check-big'
 const ICON_X = '#icon-x'
+const FINISHED = 'finished'
 
-const todoList = {}
+let todoList = {}
+let todoListFinished = {}
 
 document.addEventListener('DOMContentLoaded', () => {
   const yearElement = document.getElementById('daily-year')
@@ -55,6 +58,7 @@ const createTodoElement = (content) => {
   stateDiv.className = 'state'
   const stateSvg = createSvgElement(ICON_CIRCLE_DASHED)
   stateDiv.appendChild(stateSvg)
+  stateDiv.addEventListener('click', handleCheckToggle)
 
   const contentDiv = document.createElement('div')
   contentDiv.className = 'content'
@@ -82,15 +86,46 @@ const displayTodo = () => {
     todoItem.id = id
     todoListContainer.appendChild(todoItem)
   }
+
+  for (let id in todoListFinished) {
+    const content = todoListFinished[id]
+    const todoItem = createTodoElement(content)
+    todoItem.id = id
+    todoItem.classList.add(FINISHED)
+    todoListContainer.appendChild(todoItem)
+  }
 }
 
 const handleRemoveTodo = (e) => {
   const todoItem = e.target.closest('div.todoItem')
   const id = todoItem.id
-  if (
-    window.confirm(`${todoList[id]}를 삭제하시겠습니까? 복구되지 않습니다.`)
-  ) {
-    delete todoList[id]
+
+  if (window.confirm(`삭제하시겠습니까? 복구되지 않습니다.`)) {
+    if (id in todoList) delete todoList[id]
+    else delete todoListFinished[id]
     displayTodo()
   }
+}
+
+const handleCheckToggle = (e) => {
+  const todoItem = e.target.closest('div.todoItem')
+  const id = todoItem.id
+
+  if (todoItem.classList.contains(FINISHED)) {
+    const { [id]: todo, ...newTodoList } = todoListFinished
+    todoList[id] = todo
+    todoListFinished = newTodoList
+  } else {
+    const { [id]: todo, ...newTodoList } = todoList
+    todoListFinished[id] = todo
+    todoList = newTodoList
+  }
+  console.log('todoList', Object.entries(todoList))
+  console.log('todoList', Object.entries(todoListFinished))
+  displayTodo()
+  //   const use = e.target.children[0]
+  //   const href = use.href.baseVal
+  //   href === ICON_CHECKED
+  //     ? (use.href.baseVal = ICON_CIRCLE_DASHED)
+  //     : (use.href.baseVal = ICON_CHECKED)
 }
