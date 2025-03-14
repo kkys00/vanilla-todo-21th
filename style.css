@@ -146,6 +146,10 @@ main {
   text-decoration: line-through;
 }
 
+.finished .state {
+  color: #ff748b;
+}
+
 svg {
   user-select: none;
 }

@@ -50,13 +50,13 @@ const createSvgElement = (hrefName) => {
   return svg
 }
 
-const createTodoElement = (content) => {
+const createTodoElement = (content, checkboxIcon) => {
   const todoItem = document.createElement('div')
   todoItem.className = 'todoItem'
 
   const stateDiv = document.createElement('div')
   stateDiv.className = 'state'
-  const stateSvg = createSvgElement(ICON_CIRCLE_DASHED)
+  const stateSvg = createSvgElement(checkboxIcon)
   stateDiv.appendChild(stateSvg)
   stateDiv.addEventListener('click', handleCheckToggle)
 
@@ -82,14 +82,14 @@ const displayTodo = () => {
 
   for (let id in todoList) {
     const content = todoList[id]
-    const todoItem = createTodoElement(content)
+    const todoItem = createTodoElement(content, ICON_CIRCLE_DASHED)
     todoItem.id = id
     todoListContainer.appendChild(todoItem)
   }
 
   for (let id in todoListFinished) {
     const content = todoListFinished[id]
-    const todoItem = createTodoElement(content)
+    const todoItem = createTodoElement(content, ICON_CHECKED)
     todoItem.id = id
     todoItem.classList.add(FINISHED)
     todoListContainer.appendChild(todoItem)
@@ -123,9 +123,4 @@ const handleCheckToggle = (e) => {
   console.log('todoList', Object.entries(todoList))
   console.log('todoList', Object.entries(todoListFinished))
   displayTodo()
-  //   const use = e.target.children[0]
-  //   const href = use.href.baseVal
-  //   href === ICON_CHECKED
-  //     ? (use.href.baseVal = ICON_CIRCLE_DASHED)
-  //     : (use.href.baseVal = ICON_CHECKED)
 }
