@@ -57,6 +57,15 @@ main {
 
 .todoDate .date {
   margin: 0;
+  font-size: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.todoDate .count {
+  padding: 0 10px;
+  color: #ff748b;
 }
 
 .todoInput {

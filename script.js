@@ -1,6 +1,7 @@
 const input = document.getElementById('todo-input')
 const addButton = document.getElementById('add-button')
 const todoListContainer = document.getElementById('todoList-container')
+const count = document.getElementById('todo-count')
 
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
 const ICON_CHECKED = '#icon-circle-check-big'
@@ -19,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   yearElement.innerHTML = year
   dateElement.innerHTML = `${month} ${date} ${day}`
+
+  displayTodoCount()
 })
 
 const handleAddTodo = () => {
@@ -77,6 +80,15 @@ const createTodoElement = (content, checkboxIcon) => {
   return todoItem
 }
 
+const displayTodoCount = () => {
+  const todoListCount = Object.keys(todoList).length
+  const todoListFinishedCount = Object.keys(todoListFinished).length
+
+  count.innerText = `${todoListFinishedCount}/${
+    todoListCount + todoListFinishedCount
+  }`
+}
+
 const displayTodo = () => {
   todoListContainer.innerHTML = ''
 
@@ -94,6 +106,8 @@ const displayTodo = () => {
     todoItem.classList.add(FINISHED)
     todoListContainer.appendChild(todoItem)
   }
+
+  displayTodoCount()
 }
 
 const handleRemoveTodo = (e) => {
@@ -120,7 +134,6 @@ const handleCheckToggle = (e) => {
     todoListFinished[id] = todo
     todoList = newTodoList
   }
-  console.log('todoList', Object.entries(todoList))
-  console.log('todoList', Object.entries(todoListFinished))
+
   displayTodo()
 }
