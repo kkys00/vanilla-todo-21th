@@ -18,7 +18,7 @@ const KEY = 'kysJSTodoList'
 let todoData = {}
 let curDate
 
-const weekDate = []
+let weekDate = []
 const dateElements = document.getElementsByClassName('weekly-date')
 const stateElements = document.getElementsByClassName('weekly-state')
 
@@ -67,6 +67,7 @@ const displayWeeklyData = () => {
   for (let i = 0; i < 7; i++) {
     const targetDate = weekDate[i]
     dateElements[i].innerHTML = targetDate.slice(-2)
+    stateElements[i].classList.remove('complete')
 
     if (targetDate in todoData === false) {
       stateElements[i].innerHTML = '0/0'
@@ -82,13 +83,17 @@ const displayWeeklyData = () => {
   }
 
   const totalElement = document.getElementById('weekly-total')
-  totalElement.innerHTML = `total ${finishedTasks}/${totalTasks} (${(
-    (finishedTasks / totalTasks) *
-    100
-  ).toFixed(2)}%)`
+  if (finishedTasks === totalTasks)
+    totalElement.innerHTML = `total ${finishedTasks}/${totalTasks} (100.0%)`
+  else
+    totalElement.innerHTML = `total ${finishedTasks}/${totalTasks} (${(
+      (finishedTasks / totalTasks) *
+      100
+    ).toFixed(2)}%)`
 }
 
 const getWeeklyData = () => {
+  weekDate = []
   let curDateObj = new Date(curDate)
   const curDay = curDateObj.getDay()
 
