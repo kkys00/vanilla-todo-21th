@@ -6,6 +6,7 @@ const count = document.getElementById('todo-count')
 const yearElement = document.getElementById('daily-year')
 const dateElement = document.getElementById('daily-date')
 const dateInput = document.getElementById('date-input')
+const weeklyElement = document.getElementById('weekly-week')
 
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
 const ICON_CHECKED = '#icon-circle-check-big'
@@ -143,6 +144,7 @@ const handleDateSelect = (e) => {
 
 yearElement.addEventListener('click', handleDateClick)
 dateElement.addEventListener('click', handleDateClick)
+weeklyElement.addEventListener('click', handleDateClick)
 dateInput.addEventListener('change', handleDateSelect)
 
 const handleAddTodo = () => {
