@@ -35,6 +35,11 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 header {
   color: var(--darkest-color);
   margin-left: 10px;
