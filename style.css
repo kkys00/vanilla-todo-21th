@@ -4,12 +4,12 @@
   --darker-color: #bcccdc;
   --darkest-color: #9aa6b2;
   --shadow-color: #9aa6b230;
+  --point-color: #ff748b;
 
   --light-stroke: #dedede;
   --dark-stroke: #b6b6b6;
 
   --text-gray: #797979;
-  --text-black: #191919;
 }
 
 @font-face {
@@ -89,7 +89,7 @@ main {
 
 .todoDate .count {
   padding: 0 10px;
-  color: #ff748b;
+  color: var(--point-color);
   font-family: system-ui, sans-serif;
 }
 
@@ -183,7 +183,7 @@ main {
 }
 
 .finished .state {
-  color: #ff748b;
+  color: var(--point-color);
 }
 
 svg {
