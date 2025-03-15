@@ -3,6 +3,10 @@ const addButton = document.getElementById('add-button')
 const todoListContainer = document.getElementById('todoList-container')
 const count = document.getElementById('todo-count')
 
+const yearElement = document.getElementById('daily-year')
+const dateElement = document.getElementById('daily-date')
+const dateInput = document.getElementById('date-input')
+
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
 const ICON_CHECKED = '#icon-circle-check-big'
 const ICON_X = '#icon-x'
@@ -11,18 +15,44 @@ const FINISHED = 'finished'
 let todoList = {}
 let todoListFinished = {}
 
-document.addEventListener('DOMContentLoaded', () => {
-  const yearElement = document.getElementById('daily-year')
-  const dateElement = document.getElementById('daily-date')
+let curDate
 
-  const dateObj = new Date()
+const formatDate = (date) => {
+  const year = date.getFullYear()
+  const mm = String(date.getMonth() + 1).padStart(2, '0')
+  const dd = String(date.getDate()).padStart(2, '0')
+
+  return `${year}-${mm}-${dd}`
+}
+
+const displayDate = () => {
+  const dateObj = new Date(curDate)
   const [day, month, date, year] = dateObj.toString().split(' ')
 
   yearElement.innerHTML = year
   dateElement.innerHTML = `${month} ${date} ${day}`
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+  const date = new Date()
+  curDate = formatDate(date)
+
+  displayDate()
   displayTodoCount()
 })
+
+const handleDateClick = () => {
+  dateInput.showPicker()
+}
+
+const handleDateSelect = (e) => {
+  curDate = e.target.value
+  displayDate()
+}
+
+yearElement.addEventListener('click', handleDateClick)
+dateElement.addEventListener('click', handleDateClick)
+dateInput.addEventListener('change', handleDateSelect)
 
 const handleAddTodo = () => {
   const task = input.value

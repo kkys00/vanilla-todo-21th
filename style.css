@@ -63,6 +63,7 @@ main {
 
 .todoDate .year {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .todoDate .date {
@@ -71,6 +72,10 @@ main {
 
   display: flex;
   justify-content: space-between;
+}
+
+.todoDate #daily-date {
+  cursor: pointer;
 }
 
 .todoDate .count {
