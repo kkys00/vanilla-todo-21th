@@ -122,10 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem(KEY))
     todoData = JSON.parse(localStorage.getItem(KEY))
 
-  createCurTodoData()
+  // createCurTodoData()
   displayDate()
   displayTodo()
-  displayTodoCount()
   getWeeklyData()
   displayWeeklyData()
   addEventListenerToWeeklyItem()
@@ -138,7 +137,7 @@ const handleDateClick = () => {
 const handleDateSelect = (e) => {
   curDate = e.target.value
 
-  createCurTodoData()
+  // createCurTodoData()
   displayDate()
   displayTodo()
   getWeeklyData()
@@ -164,12 +163,14 @@ const handleAddTodo = () => {
 
   if (task) {
     const key = new Date().getTime()
+    createCurTodoData()
 
     todoData[curDate][UNFINISHED][key] = task
 
     input.value = ''
     saveTodoDataInLocalStorage()
     displayTodo()
+    displayWeeklyData()
   }
 }
 
@@ -219,6 +220,11 @@ const createTodoElement = (content, checkboxIcon) => {
 }
 
 const displayTodoCount = () => {
+  if (curDate in todoData === false) {
+    count.innerText = '0/0'
+    return
+  }
+
   const todoList = todoData[curDate][UNFINISHED]
   const todoListFinished = todoData[curDate][FINISHED]
 
@@ -232,6 +238,9 @@ const displayTodoCount = () => {
 
 const displayTodo = () => {
   todoListContainer.innerHTML = ''
+  displayTodoCount()
+
+  if (curDate in todoData === false) return
 
   const todoList = todoData[curDate][UNFINISHED]
   const todoListFinished = todoData[curDate][FINISHED]
@@ -250,8 +259,6 @@ const displayTodo = () => {
     todoItem.classList.add(FINISHED)
     todoListContainer.appendChild(todoItem)
   }
-
-  displayTodoCount()
 }
 
 const handleRemoveTodo = (e) => {
