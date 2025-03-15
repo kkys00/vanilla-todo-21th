@@ -38,7 +38,6 @@ const createCurTodoData = () => {
     [UNFINISHED]: {},
     [FINISHED]: {},
   }
-  console.log('생성', todoData)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -73,7 +72,6 @@ const handleAddTodo = () => {
     const key = new Date().getTime()
 
     todoData[curDate][UNFINISHED][key] = task
-    console.log('추가', todoData)
 
     input.value = ''
     displayTodo()
@@ -158,7 +156,6 @@ const displayTodo = () => {
     todoListContainer.appendChild(todoItem)
   }
 
-  console.log('표시', todoData)
   displayTodoCount()
 }
 
@@ -184,15 +181,9 @@ const handleCheckToggle = (e) => {
   let todoListFinished = todoData[curDate][FINISHED]
 
   if (todoItem.classList.contains(FINISHED)) {
-    // const { [id]: todo, ...newTodoList } = todoListFinished
-    // todoList[id] = todo
-    // todoListFinished = newTodoList
     todoList[id] = todoListFinished[id]
     delete todoListFinished[id]
   } else {
-    // const { [id]: todo, ...newTodoList } = todoList
-    // todoListFinished[id] = todo
-    // todoList = newTodoList
     todoListFinished[id] = todoList[id]
     delete todoList[id]
   }
