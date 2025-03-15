@@ -10,10 +10,10 @@ const dateInput = document.getElementById('date-input')
 const ICON_CIRCLE_DASHED = '#icon-circle-dashed'
 const ICON_CHECKED = '#icon-circle-check-big'
 const ICON_X = '#icon-x'
+const UNFINISHED = 'pending'
 const FINISHED = 'finished'
 
-let todoList = {}
-let todoListFinished = {}
+const todoData = {}
 
 let curDate
 
@@ -33,10 +33,19 @@ const displayDate = () => {
   dateElement.innerHTML = `${month} ${date} ${day}`
 }
 
+const createCurTodoData = () => {
+  todoData[curDate] = {
+    [UNFINISHED]: {},
+    [FINISHED]: {},
+  }
+  console.log('생성', todoData)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const date = new Date()
   curDate = formatDate(date)
 
+  createCurTodoData()
   displayDate()
   displayTodoCount()
 })
@@ -47,7 +56,10 @@ const handleDateClick = () => {
 
 const handleDateSelect = (e) => {
   curDate = e.target.value
+
+  if (curDate in todoData === false) createCurTodoData()
   displayDate()
+  displayTodo()
 }
 
 yearElement.addEventListener('click', handleDateClick)
@@ -59,7 +71,10 @@ const handleAddTodo = () => {
 
   if (task) {
     const key = new Date().getTime()
-    todoList[key] = task
+
+    todoData[curDate][UNFINISHED][key] = task
+    console.log('추가', todoData)
+
     input.value = ''
     displayTodo()
   }
@@ -111,6 +126,9 @@ const createTodoElement = (content, checkboxIcon) => {
 }
 
 const displayTodoCount = () => {
+  const todoList = todoData[curDate][UNFINISHED]
+  const todoListFinished = todoData[curDate][FINISHED]
+
   const todoListCount = Object.keys(todoList).length
   const todoListFinishedCount = Object.keys(todoListFinished).length
 
@@ -121,6 +139,9 @@ const displayTodoCount = () => {
 
 const displayTodo = () => {
   todoListContainer.innerHTML = ''
+
+  const todoList = todoData[curDate][UNFINISHED]
+  const todoListFinished = todoData[curDate][FINISHED]
 
   for (let id in todoList) {
     const content = todoList[id]
@@ -137,12 +158,16 @@ const displayTodo = () => {
     todoListContainer.appendChild(todoItem)
   }
 
+  console.log('표시', todoData)
   displayTodoCount()
 }
 
 const handleRemoveTodo = (e) => {
   const todoItem = e.target.closest('div.todoItem')
   const id = todoItem.id
+
+  const todoList = todoData[curDate][UNFINISHED]
+  const todoListFinished = todoData[curDate][FINISHED]
 
   if (window.confirm(`삭제하시겠습니까? 복구되지 않습니다.`)) {
     if (id in todoList) delete todoList[id]
@@ -155,14 +180,21 @@ const handleCheckToggle = (e) => {
   const todoItem = e.target.closest('div.todoItem')
   const id = todoItem.id
 
+  let todoList = todoData[curDate][UNFINISHED]
+  let todoListFinished = todoData[curDate][FINISHED]
+
   if (todoItem.classList.contains(FINISHED)) {
-    const { [id]: todo, ...newTodoList } = todoListFinished
-    todoList[id] = todo
-    todoListFinished = newTodoList
+    // const { [id]: todo, ...newTodoList } = todoListFinished
+    // todoList[id] = todo
+    // todoListFinished = newTodoList
+    todoList[id] = todoListFinished[id]
+    delete todoListFinished[id]
   } else {
-    const { [id]: todo, ...newTodoList } = todoList
-    todoListFinished[id] = todo
-    todoList = newTodoList
+    // const { [id]: todo, ...newTodoList } = todoList
+    // todoListFinished[id] = todo
+    // todoList = newTodoList
+    todoListFinished[id] = todoList[id]
+    delete todoList[id]
   }
 
   displayTodo()
