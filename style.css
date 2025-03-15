@@ -207,7 +207,10 @@ svg {
   user-select: none;
 }
 
-use {
+use,
+.dataHeader,
+.weekly-date,
+.weekly-state {
   pointer-events: none;
 }
 

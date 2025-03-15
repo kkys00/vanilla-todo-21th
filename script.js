@@ -22,6 +22,7 @@ let curDate
 let weekDate = []
 const dateElements = document.getElementsByClassName('weekly-date')
 const stateElements = document.getElementsByClassName('weekly-state')
+const weeklyDataItems = document.getElementsByClassName('weeklyDataItem')
 
 const saveTodoDataInLocalStorage = () => {
   localStorage.setItem(KEY, JSON.stringify(todoData))
@@ -69,6 +70,7 @@ const displayWeeklyData = () => {
     const targetDate = weekDate[i]
     dateElements[i].innerHTML = targetDate.slice(-2)
     stateElements[i].classList.remove('complete')
+    weeklyDataItems[i].id = weekDate[i]
 
     if (targetDate in todoData === false) {
       stateElements[i].innerHTML = '0/0'
@@ -126,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   displayTodoCount()
   getWeeklyData()
   displayWeeklyData()
+  addEventListenerToWeeklyItem()
 })
 
 const handleDateClick = () => {
@@ -140,6 +143,15 @@ const handleDateSelect = (e) => {
   displayTodo()
   getWeeklyData()
   displayWeeklyData()
+}
+
+const addEventListenerToWeeklyItem = () => {
+  for (let i = 0; i < weeklyDataItems.length; i++) {
+    weeklyDataItems[i].addEventListener('click', (e) => {
+      const date = e.target.id
+      handleDateSelect({ target: { value: date } })
+    })
+  }
 }
 
 yearElement.addEventListener('click', handleDateClick)
