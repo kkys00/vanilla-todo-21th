@@ -129,6 +129,7 @@ footer {
   outline: none;
 }
 
+.weeklyDataItem:hover,
 .todoDate .year:hover,
 .todoDate #daily-date:hover,
 .todoInput input:hover,
@@ -208,4 +209,49 @@ svg {
 
 use {
   pointer-events: none;
+}
+
+.weeklyDataContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0px;
+}
+
+.weeklyDataItem {
+  padding: 10px 5px;
+  border-radius: 10px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.dataHeader {
+  color: var(--darker-color);
+}
+
+.weekly-date {
+  color: var(--text-gray);
+}
+
+.weekly-state {
+  color: var(--point-color);
+  text-align: center;
+}
+
+.weekly-state.complete {
+  color: var(--light-stroke);
+}
+
+#weekly-total {
+  color: var(--darker-color);
+  text-align: end;
+}
+
+.sat {
+  color: #3098ff;
+}
+
+.sun {
+  color: #ff307c;
 }

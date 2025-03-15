@@ -18,6 +18,10 @@ const KEY = 'kysJSTodoList'
 let todoData = {}
 let curDate
 
+const weekDate = []
+const dateElements = document.getElementsByClassName('weekly-date')
+const stateElements = document.getElementsByClassName('weekly-state')
+
 const saveTodoDataInLocalStorage = () => {
   localStorage.setItem(KEY, JSON.stringify(todoData))
 }
@@ -46,6 +50,63 @@ const createCurTodoData = () => {
     }
 }
 
+const calcTodoCount = (targetDate) => {
+  const todoList = todoData[targetDate][UNFINISHED]
+  const todoListFinished = todoData[targetDate][FINISHED]
+
+  const todoListCount = Object.keys(todoList).length
+  const todoListFinishedCount = Object.keys(todoListFinished).length
+
+  return [todoListFinishedCount, todoListFinishedCount + todoListCount]
+}
+
+const displayWeeklyData = () => {
+  let finishedTasks = 0
+  let totalTasks = 0
+
+  for (let i = 0; i < 7; i++) {
+    const targetDate = weekDate[i]
+    dateElements[i].innerHTML = targetDate.slice(-2)
+
+    if (targetDate in todoData === false) {
+      stateElements[i].innerHTML = '0/0'
+      stateElements[i].classList.add('complete')
+    } else {
+      const [fin, total] = calcTodoCount(targetDate)
+      finishedTasks += fin
+      totalTasks += total
+      stateElements[i].innerHTML = `${fin}/${total}`
+
+      if (fin === total) stateElements[i].classList.add('complete')
+    }
+  }
+
+  const totalElement = document.getElementById('weekly-total')
+  totalElement.innerHTML = `total ${finishedTasks}/${totalTasks} (${(
+    (finishedTasks / totalTasks) *
+    100
+  ).toFixed(2)}%)`
+}
+
+const getWeeklyData = () => {
+  let curDateObj = new Date(curDate)
+  const curDay = curDateObj.getDay()
+
+  for (let i = curDay; i !== 0; i--) {
+    curDateObj.setDate(curDateObj.getDate() - 1)
+    weekDate.push(formatDate(curDateObj))
+  }
+  weekDate.reverse()
+
+  curDateObj = new Date(curDate)
+  for (let i = curDay; weekDate.length < 7; i++) {
+    weekDate.push(formatDate(curDateObj))
+    curDateObj.setDate(curDateObj.getDate() + 1)
+  }
+
+  console.log(weekDate)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const date = new Date()
   curDate = formatDate(date)
@@ -57,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
   displayDate()
   displayTodo()
   displayTodoCount()
+  getWeeklyData()
+  displayWeeklyData()
 })
 
 const handleDateClick = () => {
@@ -69,6 +132,8 @@ const handleDateSelect = (e) => {
   createCurTodoData()
   displayDate()
   displayTodo()
+  getWeeklyData()
+  displayWeeklyData()
 }
 
 yearElement.addEventListener('click', handleDateClick)
@@ -182,6 +247,7 @@ const handleRemoveTodo = (e) => {
     else delete todoListFinished[id]
     saveTodoDataInLocalStorage()
     displayTodo()
+    displayWeeklyData()
   }
 }
 
@@ -202,4 +268,5 @@ const handleCheckToggle = (e) => {
 
   saveTodoDataInLocalStorage()
   displayTodo()
+  displayWeeklyData()
 }
