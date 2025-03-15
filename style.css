@@ -12,6 +12,13 @@
   --text-black: #191919;
 }
 
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: normal;
+  font-style: normal;
+  src: url('/font/Pretendard-Regular.otf') format('opentype');
+}
+
 html,
 body,
 main {
@@ -24,11 +31,14 @@ body {
 
   display: flex;
   flex-direction: column;
+
+  font-family: 'Pretendard', sans-serif;
 }
 
 header {
   color: var(--darkest-color);
   margin-left: 10px;
+  font-family: system-ui, sans-serif;
 }
 
 main {
@@ -66,6 +76,7 @@ main {
 .todoDate .count {
   padding: 0 10px;
   color: #ff748b;
+  font-family: system-ui, sans-serif;
 }
 
 .todoInput {
