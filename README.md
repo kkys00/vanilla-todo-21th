@@ -2,14 +2,23 @@
 
 # 서론
 
-안녕하세요. 저는 21기 프론트엔드 **김영서**입니다😊
+안녕하세요. 저는 21기 프론트엔드 **김영서**입니다😊  
+바닐라 자바스크립트를 사용하여 To do list를 만들었습니다.
 
-**to-do list**
+1. 와이어프레임 작성  
+   <img src="./docs/wireframe.jpg" width="300">
+2. [피그마](https://www.figma.com/design/oUJT679EyBJYQmCJgNdgvJ/CEOS-Frontend-21-%EA%B9%80%EC%98%81%EC%84%9C?node-id=0-1&t=NApCyJNiTO7XhMKT-1) 작성  
+   ![Figma](./docs/figma-design.png)
+3. 개발
+
+**YS-Todo 기능**
 
 1. 날짜를 클릭하여 날짜 선택 가능
 2. task 완료 개수 / 전체 개수 표시
 3. 추가 버튼, `Enter` 키를 이용한 task 추가 / X 버튼 삭제 / O 버튼 완료 체크
 4. localStorage에 데이터 저장
+5. Weekly로 날짜 이동
+6. Weekly에서 한 주의 task 확인
 
 # 미션
 
