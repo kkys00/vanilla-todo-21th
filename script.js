@@ -13,9 +13,14 @@ const ICON_X = '#icon-x'
 const UNFINISHED = 'pending'
 const FINISHED = 'finished'
 
-const todoData = {}
+const KEY = 'kysJSTodoList'
 
+let todoData = {}
 let curDate
+
+const saveTodoDataInLocalStorage = () => {
+  localStorage.setItem(KEY, JSON.stringify(todoData))
+}
 
 const formatDate = (date) => {
   const year = date.getFullYear()
@@ -34,18 +39,23 @@ const displayDate = () => {
 }
 
 const createCurTodoData = () => {
-  todoData[curDate] = {
-    [UNFINISHED]: {},
-    [FINISHED]: {},
-  }
+  if (curDate in todoData === false)
+    todoData[curDate] = {
+      [UNFINISHED]: {},
+      [FINISHED]: {},
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const date = new Date()
   curDate = formatDate(date)
 
+  if (localStorage.getItem(KEY))
+    todoData = JSON.parse(localStorage.getItem(KEY))
+
   createCurTodoData()
   displayDate()
+  displayTodo()
   displayTodoCount()
 })
 
@@ -56,7 +66,7 @@ const handleDateClick = () => {
 const handleDateSelect = (e) => {
   curDate = e.target.value
 
-  if (curDate in todoData === false) createCurTodoData()
+  createCurTodoData()
   displayDate()
   displayTodo()
 }
@@ -74,6 +84,7 @@ const handleAddTodo = () => {
     todoData[curDate][UNFINISHED][key] = task
 
     input.value = ''
+    saveTodoDataInLocalStorage()
     displayTodo()
   }
 }
@@ -169,6 +180,7 @@ const handleRemoveTodo = (e) => {
   if (window.confirm(`삭제하시겠습니까? 복구되지 않습니다.`)) {
     if (id in todoList) delete todoList[id]
     else delete todoListFinished[id]
+    saveTodoDataInLocalStorage()
     displayTodo()
   }
 }
@@ -188,5 +200,6 @@ const handleCheckToggle = (e) => {
     delete todoList[id]
   }
 
+  saveTodoDataInLocalStorage()
   displayTodo()
 }
