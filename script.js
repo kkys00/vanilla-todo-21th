@@ -36,12 +36,32 @@ const formatDate = (date) => {
   return `${year}-${mm}-${dd}`
 }
 
+const calcKSWeekNumber = (date) => {
+  const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
+  const firstDayWeekday = firstDayOfMonth.getDay()
+  const dayOfMonth = date.getDate()
+
+  let month = date.getMonth() + 1
+  let week = Math.ceil((dayOfMonth + firstDayWeekday) / 7)
+
+  if (firstDayWeekday > 0 && firstDayWeekday < 5) return [month, week]
+
+  week -= 1
+  if (week > 0) return [month, week]
+
+  const lastDayOfPrevMonth = new Date(date.getFullYear(), date.getMonth(), 0)
+  return calcKSWeekNumber(lastDayOfPrevMonth)
+}
+
 const displayDate = () => {
   const dateObj = new Date(curDate)
   const [day, month, date, year] = dateObj.toString().split(' ')
 
   yearElement.innerHTML = year
   dateElement.innerHTML = `${month} ${date} ${day}`
+
+  const [monthOfWeek, week] = calcKSWeekNumber(dateObj)
+  weeklyElement.innerHTML = `${year}년 ${monthOfWeek}월 ${week}째 주`
 }
 
 const createCurTodoData = () => {
